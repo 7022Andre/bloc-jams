@@ -28,6 +28,21 @@ var albumMarconi = {
     ]
 };
 
+var albumAndre = {
+    title: 'Learn to Code',
+    artist: 'Andre',
+    label: 'BLOC',
+    year: '2017',
+    albumArtUrl: 'https://avatars0.githubusercontent.com/u/23385321?v=3&s=460',
+    songs: [
+     { title: 'I know this - This is easy', duration: '5:00' },
+     { title: 'Hm, I am stuck!', duration: '58:12' },
+     { title: 'I think I got it', duration: '0:15'},
+     { title: 'Well, this is even more confusing', duration: '30:55' },
+     { title: 'Checkpoint complete :)', duration: '12:15'}
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
         '<tr class="album-view-song-item">'
@@ -56,4 +71,15 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+    var cover = document.getElementsByClassName('album-cover-art')[0];
+    var albumTitle = document.getElementsByClassName('album-view-title')[0];
+    cover.addEventListener("click", function() {
+        if (albumTitle.textContent === albumPicasso.title) {
+            setCurrentAlbum(albumMarconi);
+        } else if (albumTitle.textContent === albumMarconi.title) {
+            setCurrentAlbum(albumAndre);
+        } else if (albumTitle.textContent === albumAndre.title) {
+            setCurrentAlbum(albumPicasso);
+        }
+    });
 };
