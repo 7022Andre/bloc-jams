@@ -72,14 +72,13 @@ var setCurrentAlbum = function(album) {
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
     var cover = document.getElementsByClassName('album-cover-art')[0];
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
+    var albumList = [albumPicasso, albumMarconi, albumAndre];
+    var index = 1;
     cover.addEventListener("click", function() {
-        if (albumTitle.textContent === albumPicasso.title) {
-            setCurrentAlbum(albumMarconi);
-        } else if (albumTitle.textContent === albumMarconi.title) {
-            setCurrentAlbum(albumAndre);
-        } else if (albumTitle.textContent === albumAndre.title) {
-            setCurrentAlbum(albumPicasso);
+        setCurrentAlbum(albumList[index]);
+        index++;
+        if (index === albumList.length) {
+            index = 0;
         }
     });
 };
