@@ -13,7 +13,7 @@ var buildCollectionItemTemplate = function() {
     + '    </p>'
     + '  </div>'
     + '</div>';
-return $(template);
+    return $(template);
 };
 
 $(window).load(function() {
