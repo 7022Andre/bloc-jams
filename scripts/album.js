@@ -16,8 +16,7 @@ var createSongRow = function(songNumber, songName, songLength) {
         if (currentlyPlayingSongNumber !== songNumber) {
             // Switch from Play -> Pause button to indicate new song is playing.
             $(this).html(pauseButtonTemplate);
-            currentlyPlayingSongNumber = songNumber;
-            currentSongFromAlbum = currentAlbum.songs[songNumber -1];
+            setSong(songNumber);
             updatePlayerBarSong();
         } else if (currentlyPlayingSongNumber === songNumber) {
             // Switch from Pause -> Play button to pause currently playing song.
@@ -28,15 +27,13 @@ var createSongRow = function(songNumber, songName, songLength) {
         }
     };
     var onHover = function(event) {
-        var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = +songNumberCell.attr('data-song-number');
+        var songNumberCell = getSongNumberCell(songNumber);
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(playButtonTemplate);
         }
     };
     var offHover = function(event) {
-        var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = +songNumberCell.attr('data-song-number');
+        var songNumberCell = getSongNumberCell(songNumber);
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(songNumber);
         }
@@ -64,6 +61,15 @@ var setCurrentAlbum = function(album) {
     }
 };
 
+var setSong = function(songNumber) {
+    currentlyPlayingSongNumber = songNumber;
+    currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+};
+
+var getSongNumberCell = function(number) {
+    return $('.song-item-number[data-song-number*="' + number + '"]');
+};
+
 var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 };
@@ -77,8 +83,7 @@ var nextSong = function() {
     if (currentSongIndex >= currentAlbum.songs.length) {
         currentSongIndex = 0;
     }
-    currentlyPlayingSongNumber = currentSongIndex + 1; // Set new current song
-    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+    setSong(currentSongIndex + 1);
     updatePlayerBarSong();
     var lastSongNumber = getLastSongNumber(currentSongIndex);
     var $nextSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
@@ -96,10 +101,9 @@ var previousSong = function() {
     if (currentSongIndex < 0) {
         currentSongIndex = currentAlbum.songs.length - 1;
     }
-    currentlyPlayingSongNumber = currentSongIndex + 1;
-    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+    setSong(currentSongIndex + 1);
     updatePlayerBarSong();
-    $('.main-controls .play-pause').html(playerBarPauseButton);
+    $('.main-controls .play-pause').html(playerBarPauseButton); // What does this line do? If I remove it Bloc Jams works?!
     var lastSongNumber = getLastSongNumber(currentSongIndex);
     var $previousSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
     var $lastSongNumberCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
