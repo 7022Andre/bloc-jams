@@ -125,7 +125,7 @@ var previousSong = function() {
     setSong(currentSongIndex + 1);
     currentSoundFile.play();
     updatePlayerBarSong();
-    $('.main-controls .play-pause').html(playerBarPauseButton); // What does this line do? If I remove it Bloc Jams works?!
+    $('.main-controls .play-pause').html(playerBarPauseButton);
     var lastSongNumber = getLastSongNumber(currentSongIndex);
     var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
@@ -140,10 +140,23 @@ var updatePlayerBarSong = function() {
     $('.main-controls .play-pause').html(playerBarPauseButton);
 };
 
+var togglePlayFromPlayerBar = function() {
+    if (currentSoundFile.isPaused() && playerBarButtons.html() === playerBarPlayButton) {
+        getSongNumberCell(currentlyPlayingSongNumber).html(playerBarPauseButton);
+        playerBarButtons.html(playerBarPauseButton);
+        currentSoundFile.play();
+    } else if (!currentSoundFile.isPaused() && playerBarButtons.html() === playerBarPauseButton) {
+        getSongNumberCell(currentlyPlayingSongNumber).html(playerBarPlayButton);
+        playerBarButtons.html(playerBarPlayButton);
+        currentSoundFile.pause();
+    }
+};
+
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 var playerBarPlayButton = '<span class="ion-play"></span>';
 var playerBarPauseButton = '<span class="ion-pause"></span>';
+var playerBarButtons = $('.main-controls .play-pause');
 var currentAlbum = null;
 var currentlyPlayingSongNumber = null;
 var currentSongFromAlbum = null;
@@ -156,4 +169,5 @@ $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    playerBarButtons.click(togglePlayFromPlayerBar);
 });
