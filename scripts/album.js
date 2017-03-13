@@ -224,6 +224,7 @@ var setupSeekBars = function() {
             $(document).off('mouseup.thumb');
         });
      });
+};
 
 var togglePlayFromPlayerBar = function() {
     if (currentSoundFile.isPaused() && playerBarButtons.html() === playerBarPlayButton) {
