@@ -142,11 +142,11 @@ var updatePlayerBarSong = function() {
 
 var togglePlayFromPlayerBar = function() {
     if (currentSoundFile.isPaused() && playerBarButtons.html() === playerBarPlayButton) {
-        getSongNumberCell(currentlyPlayingSongNumber).html(playerBarPauseButton);
+        getSongNumberCell(currentlyPlayingSongNumber).html(pauseButtonTemplate);
         playerBarButtons.html(playerBarPauseButton);
         currentSoundFile.play();
     } else if (!currentSoundFile.isPaused() && playerBarButtons.html() === playerBarPauseButton) {
-        getSongNumberCell(currentlyPlayingSongNumber).html(playerBarPlayButton);
+        getSongNumberCell(currentlyPlayingSongNumber).html(playButtonTemplate);
         playerBarButtons.html(playerBarPlayButton);
         currentSoundFile.pause();
     }
