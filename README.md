@@ -12,10 +12,10 @@ I used vanilla JavaScript (and refactored with jQuery) to add animation and effe
 ### Landing page
 ![jams_main.png](https://s13.postimg.org/4oy06lr3b/jams_main.png "landing page")
 
-### Album view buttons
+### Album view while changing songs
 ![buttons.gif](https://s8.postimg.org/thfo5wus5/buttons.gif "Album view buttons")
 
-### Player bar buttons
+### Player bar
 ![player_bar.gif](https://s8.postimg.org/l2gac9vjp/player_bar.gif "Player bar buttons")
 
 ### Responsive design with album view and player bar
