@@ -1,8 +1,6 @@
 # BlocJams
 A front-end music player web application - using JavaScript and jQuery.
 
----
-
 ## Summary
 
 The goal of this project was to use the front-end web development basics I learned at Bloc and to create my own music player using HTML, CSS, JavaScript and jQuery.
